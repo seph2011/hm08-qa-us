@@ -19,5 +19,28 @@ describe('Create an order', () => {
         await page.submitPhoneNumber(phoneNumber);
         await expect(await helper.getElementByText(phoneNumber)).toBeExisting();
     })
+
+    it('should select the plan', async () => {
+        await browser.url(`/`)
+        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const supportive = await $(page.supportive);
+        await supportive.waitForDisplayed;
+        await (supportive).click();
+    })
+
+    it('should set the address', async () => {
+        await browser.url(`/`)
+        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
+    })
+
+    it('should add a credit card', async() => {
+        await browser.url(`/`)
+        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const cardNumber = helper.getCardNumber();
+        const cardCode = helper.getCardCode();
+        await page.fillCreditCard(cardNumber, cardCode);
+        await expect(div["Card-1"]).toBeExisting;
+
+    })
 })
 

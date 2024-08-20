@@ -14,7 +14,8 @@ exports.config = {
         browserName: 'chrome',
         acceptInsecureCerts: true,
         'goog:chromeOptions': {
-            args: ['headless', 'disable-gpu']
+            args: ['headless', 'disable-gpu', '--log-level=3'],
+            excludeSwitches: ['enable-logging'],
         }
     },
     {
@@ -28,8 +29,8 @@ exports.config = {
 ],
     logLevel: 'error',
     bail: 0,
-    baseUrl: 'https://e629ed6b-4969-442b-987e-087e81eb10ca.serverhub.practicum-services.com',
-    waitforTimeout: 10000,
+    baseUrl: 'https://cnt-ab1382b0-f14a-4b50-9213-cca55c55876d.containerhub.tripleten-services.com',
+    waitforTimeout: 20000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
     services: [
@@ -43,4 +44,5 @@ exports.config = {
         ui: 'bdd',
         timeout: 60000
     },
+    
 }

@@ -4,13 +4,20 @@ module.exports = {
     toField: '#to',
     phoneNumberField: '#phone',
     codeField: '#code',
+    cardNumber: '#number',
+    cardCode: '#code',
     // Buttons
     callATaxiButton: 'button=Call a taxi',
     phoneNumberButton: '//div[starts-with(text(), "Phone number")]',
     nextButton: 'button=Next',
     confirmButton: 'button=Confirm',
+    supportive: '//div[starts-with(text(), "Supportive")]',
+    paymentMethod: '.pp-button.filled',
+    addCardButton: '//div[starts-with(text(), "Add card")]',
+    linkCardButton: 'button=Link',
     // Modals
     phoneNumberModal: '.modal',
+    paymentMethodModal: '.payment-picker.open',
     // Functions
     fillAddresses: async function(from, to) {
         const fromField = await $(this.fromField);
@@ -47,5 +54,23 @@ module.exports = {
         const code = await requests[0].response.body.code
         await codeField.setValue(code)
         await $(this.confirmButton).click()
+    },
+    fillCreditCard: async function(creditCardNumber, creditCardCode) {
+        const paymentMethod = await $(this.paymentMethod);
+        await paymentMethod.waitForDisplayed();
+        await paymentMethod.click();
+        const paymentMethodModal = await $(this.paymentMethodModal);
+        await paymentMethodModal.waitForDisplayed()
+        const addCardButton = await $(this.addCardButton);
+        await addCardButton.waitForDisplayed();
+        await addCardButton.click();
+        const cardNumber = await $(this.cardNumber);
+        await cardNumber.waitForDisplayed();
+        await cardNumber.setValue(creditCardNumber);
+        const cardCode = await $(this.cardCode);
+        await cardCode.setValue(creditCardCode);
+        const linkCardButton = await $(this.linkCardButton);
+        await linkCardButton.toBeClickable();
+        await linkCardButton.click();
     },
 };
