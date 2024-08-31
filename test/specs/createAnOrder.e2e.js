@@ -39,8 +39,25 @@ describe('Create an order', () => {
         const cardNumber = helper.getCardNumber();
         const cardCode = helper.getCardCode();
         await page.fillCreditCard(cardNumber, cardCode);
-        await expect(div["Card-1"]).toBeExisting;
+        await expect(await $(`${page.addCardButton}`)).toBeExisting();
 
     })
-})
 
+    it ('should message the driver', async() => {
+        await browser.url(`/`)
+        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        await page.fillMessageField('play a funny podcast');
+        await expect($(page.messageField)).toHaveValue('play a funny podcast');
+    })
+
+    it('should order a blanket and handkerchiefs', async() => {
+        await browser.url(`/`)
+        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const supportive = await $(page.supportive);
+        await supportive.waitForDisplayed;
+        await (supportive).click();
+        await page.clickBlanketSwitch();
+        
+    })    
+
+})
