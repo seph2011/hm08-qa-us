@@ -7,7 +7,7 @@ module.exports = {
     cardNumber: '#number',
     cardCode: '.card-second-row #code',
     messageField: '#comment',
-    blanketAndHandkerchiefsSwitch: '//div[@class="input-container"]//input[@wfd-id="id8"]',
+    blanketAndHandkerchiefsSwitch: '.switch',
     // Buttons
     callATaxiButton: 'button=Call a taxi',
     phoneNumberButton: '//div[starts-with(text(), "Phone number")]',
@@ -18,6 +18,7 @@ module.exports = {
     addCardButton: '//div[starts-with(text(), "Add card")]',
     linkCardButton: 'button=Link',
     orderRequirementsMenu: '//div[starts-with(text(), "Order requirements")]',
+    addIceCreamButton: '//div[@class="counter-plus"]',
     // Modals
     phoneNumberModal: '.modal',
     paymentMethodModal: '.payment-picker.open',
@@ -76,13 +77,17 @@ module.exports = {
         await messageField.setValue(message);        
     },
     clickBlanketSwitch: async function () {
-        const orderRequirementsMenu = await $(this.orderRequirementsMenu);
-        await orderRequirementsMenu.waitForDisplayed();
-        await orderRequirementsMenu.click();
+        //const orderRequirementsMenu = await $(this.orderRequirementsMenu);
+        //await orderRequirementsMenu.waitForDisplayed();
+        //await orderRequirementsMenu.click();
         const blanketAndHandkerchiefsSwitch = await $(this.blanketAndHandkerchiefsSwitch);
         await blanketAndHandkerchiefsSwitch.waitForDisplayed();
-        await blanketAndHandkerchiefsSwitch.click();
-
-        
+        await blanketAndHandkerchiefsSwitch.click(); 
+    },
+    addIceCream: async function () {
+        const addIceCreamButton = await $(this.addIceCreamButton);
+        await addIceCreamButton.waitForDisplayed();
+        await addIceCreamButton.click();
+        await addIceCreamButton.click();
     }
 };
