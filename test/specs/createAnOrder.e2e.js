@@ -2,16 +2,6 @@ const page = require('../../page');
 const helper = require('../../helper')
 
 describe('Create an order', () => {
-    it('should open phone number modal', async () => {
-        await browser.url(`/`)
-        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
-        const phoneNumberButton = await $(page.phoneNumberButton);
-        await phoneNumberButton.waitForDisplayed();
-        await phoneNumberButton.click();
-        const pnoneNumberModal = await $(page.phoneNumberModal);
-        await expect(pnoneNumberModal).toBeExisting();
-    })
-
     it('should save the phone', async () => {
         await browser.url(`/`)
         await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
@@ -26,13 +16,13 @@ describe('Create an order', () => {
         const supportive = await $(page.supportive);
         await supportive.waitForDisplayed;
         await (supportive).click();
-        await expect($('//div[@class="tcard active"]//div[@data-for="tariff-card-4"]'));
+        await expect($('//div[@class="tcard active"]//div[@data-for="tariff-card-4"]')).toBeExisting;
     })
 
     it('should set the address', async () => {
         await browser.url(`/`)
         await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
-        await expect($('//*[@class="tariff-picker shown"]'));
+        await expect($('//*[@class="tariff-picker shown"]')).toBeExisting();
     })
 
     it('should add a credit card', async() => {
@@ -59,7 +49,7 @@ describe('Create an order', () => {
         await supportive.waitForDisplayed;
         await (supportive).click();
         await page.clickBlanketSwitch();
-        await expect($(page.blanketAndHandkerchiefsSwitch)).isEnabled;        
+        await expect($(page.blanketSwitchElement)).toBeChecked();        
     })
     
     it ('should order 2 ice creams', async() => {
@@ -69,7 +59,30 @@ describe('Create an order', () => {
         await supportive.waitForDisplayed;
         await (supportive).click();
         await page.addIceCream();
-        await expect($('//[@class="counter-value"]'));
+        await page.addIceCream();
+        await expect($('//*[@class="counter-value"]')).toHaveText("2");
+    })
+
+    it('should show the car search modal', async() => {
+        await browser.url(`/`)
+        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const supportive = await $(page.supportive);
+        await supportive.waitForDisplayed;
+        await (supportive).click();
+        await page.fillMessageField('play a funny podcast');
+        await page.confirmRide();
+        await expect($(page.carSearchModal)).toBeExisting();
+    })
+
+    it('should show waiting for driver info', async() => {
+        await browser.url(`/`)
+        await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
+        const supportive = await $(page.supportive);
+        await supportive.waitForDisplayed;
+        await (supportive).click();
+        await page.fillMessageField('play a funny podcast');
+        await page.confirmRide();
+        await expect($('//*[starts-with(text(), "The driver will arrive in")]')).toBeExisting();
     })
 
 })
