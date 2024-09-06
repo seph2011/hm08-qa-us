@@ -9,28 +9,33 @@ module.exports = {
     messageField: '#comment',
     blanketAndHandkerchiefsSwitch: '.switch',
     blanketSwitchElement: '.switch-input',
+    iceCreamCounterValue: '//*[@class="counter-value"]',
     // Buttons
     callATaxiButton: 'button=Call a taxi',
     phoneNumberButton: '//div[starts-with(text(), "Phone number")]',
     nextButton: 'button=Next',
     confirmButton: 'button=Confirm',
-    supportive: '//div[starts-with(text(), "Supportive")]',
+    supportiveButton: '//div[starts-with(text(), "Supportive")]',
     paymentMethod: '.pp-button.filled',
     addCardButton: '//div[starts-with(text(), "Add card")]',
     linkCardButton: 'button=Link',
     orderRequirementsMenu: '//div[starts-with(text(), "Order requirements")]',
     addIceCreamButton: '//div[@class="counter-plus"]',
     confirmRideButton: '//button[@class="smart-button"]',
+    supportiveIcon: '//div[@class="tcard active"]//div[@data-for="tariff-card-4"]',
     // Modals
     phoneNumberModal: '.modal',
     paymentMethodModal: '.payment-picker.open',
     carSearchModal: '.order.shown',
+    driverInfoHeader: '//*[starts-with(text(), "The driver will arrive in")]',
     // Functions
     fillAddresses: async function(from, to) {
         const fromField = await $(this.fromField);
         await fromField.setValue(from);
         const toField = await $(this.toField);
         await toField.setValue(to);
+    },    
+    clickCallATaxi: async function() {  
         const callATaxiButton = await $(this.callATaxiButton);
         await callATaxiButton.waitForDisplayed();
         await callATaxiButton.click();
