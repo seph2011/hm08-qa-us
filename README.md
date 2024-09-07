@@ -11,7 +11,7 @@ Tests described in order:
 
 'it should select the plan'-Will fill in the adddress, then selects the "supportive" ride type. It then checks that the "supportive" ride type card is active.
 
-'it should set the address'- Will fill in the address then clicks the "call a taxi" button. It then tests that the "ride type" selection is present, which can only happen once the former steps have been completed.
+'it should set the address'- Will fill in the address. It then tests that the "to" and "from" field are filled with the correct values.
 
 'it should add a credit card'- Will fill in the address, then open the "payment method" modal, select "add a credit card", generate a card number and input it into the "card number" field, then do the same with a cvv for the "card code" field, then add that card. It will then test that the card has been added as "card 1", the default name for the first card added.
 
@@ -23,4 +23,4 @@ Tests described in order:
 
 'it should show the car search modal'- Will fill in the address, then select the "supportive" ride type, add the message (note that the message must be filled in to move on), then click the "Enter the number and order" button, which should open the car search modal. It will test that the modal is shown.
 
-'it should show waiting for driver info'- Will fill in the address, then select the "supportive" ride type, add the message (note that the message must be filled in to move on), then click the "Enter the number and order" button, which should open the car search modal, then will check that the driver info appears by checking that "The driver will arrive in..." is displayed after 50 seconds. Note that when the modal first opens, there will be a timer while it searches for a driver, then the dirver info will appear.
+'it should show waiting for driver info'- Will fill in the address, fill in the phone number and confirm it, then select the "supportive" ride type, add the message (note that the message must be filled in to move on), then click the "Enter the number and order" button, which should open the car search modal, then will check that the driver info appears by checking that "The driver will arrive in..." is displayed after 50 seconds. Note that when the modal first opens, there will be a timer while it searches for a driver, then the dirver info will appear.

@@ -86,6 +86,8 @@ describe('Create an order', () => {
         await browser.url(`/`)
         await page.fillAddresses('East 2nd Street, 601', '1300 1st St');
         await page.clickCallATaxi();
+        const phoneNumber = helper.getPhoneNumber("+1");
+        await page.submitPhoneNumber(phoneNumber);
         const supportiveButton = await $(page.supportiveButton);
         await supportiveButton.waitForDisplayed;
         await (supportiveButton).click();
